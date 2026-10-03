@@ -1,9 +1,10 @@
 const PROJECT = {
   contract: "3sL58KKh2QdNSfN9VRz8bHGGU5zStdfManVHCTkhpump",
-  buyUrl: "https://dexscreener.com/solana/3sL58KKh2QdNSfN9VRz8bHGGU5zStdfManVHCTkhpump",
+  pairAddress: "HEs7k4Q6pFKWx5ExpFvxfowoe4YaAfg7ZApeJdbGtPKD",
+  buyUrl: "https://dexscreener.com/solana/HEs7k4Q6pFKWx5ExpFvxfowoe4YaAfg7ZApeJdbGtPKD",
   xUrl: "https://x.com/Pump_Inu",
   telegramUrl: "https://t.me/PumpInu_Official",
-  dexUrl: "https://dexscreener.com/solana/3sL58KKh2QdNSfN9VRz8bHGGU5zStdfManVHCTkhpump",
+  dexUrl: "https://dexscreener.com/solana/HEs7k4Q6pFKWx5ExpFvxfowoe4YaAfg7ZApeJdbGtPKD",
   founderXUrl: "https://x.com/Pump_Inu",
   tiktokUrl: "https://t.me/PumpInu_Official",
   youtubeUrl: "https://t.me/PumpInu_Official",
@@ -46,7 +47,8 @@ wireLinks(".js-tiktok-link", PROJECT.tiktokUrl);
 wireLinks(".js-youtube-link", PROJECT.youtubeUrl);
 
 // Dynamic Chart Initialization
-function initChart() {
+let chartLoadedPair = "";
+function initChart(pairAddress) {
   const chartContainer = document.getElementById("chart-container");
   if (chartContainer) {
     if (PROJECT.contract === "TBA" || !PROJECT.contract) {
@@ -59,7 +61,11 @@ function initChart() {
         </div>
       `;
     } else {
-      chartContainer.innerHTML = `<iframe src="https://dexscreener.com/solana/${PROJECT.contract}?embed=1&theme=dark&trades=0&info=0"></iframe>`;
+      const targetPair = pairAddress || PROJECT.pairAddress || PROJECT.contract;
+      if (chartLoadedPair !== targetPair) {
+        chartLoadedPair = targetPair;
+        chartContainer.innerHTML = `<iframe src="https://dexscreener.com/solana/${targetPair}?embed=1&theme=dark&trades=0&info=0"></iframe>`;
+      }
     }
   }
 }
@@ -138,6 +144,10 @@ async function fetchDexData() {
     
     const pair = data.pairs && data.pairs[0];
     if (pair) {
+      if (pair.pairAddress) {
+        PROJECT.pairAddress = pair.pairAddress;
+        initChart(pair.pairAddress);
+      }
       const price = parseFloat(pair.priceUsd || 0);
       const mcap = parseFloat(pair.marketCap || pair.fdv || 0);
       const volume = parseFloat((pair.volume && pair.volume.h24) || 0);
