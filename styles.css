@@ -668,8 +668,9 @@ img {
 }
 
 .torn-card img {
-    aspect-ratio: 1.15;
-    object-fit: cover;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
     object-position: center;
     filter: saturate(1.05) contrast(1.04);
 }
@@ -760,13 +761,14 @@ img {
 .token-visual img {
     position: relative;
     z-index: 2;
-    width: 82%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    border: 8px solid var(--paper);
-    border-radius: 50%;
-    box-shadow: 12px 15px 0 var(--ink);
-    transform: rotate(-3deg);
+    width: 90%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+    border: 4px solid var(--lime);
+    border-radius: 16px;
+    box-shadow: 12px 15px 0 var(--lime);
+    transform: rotate(-2deg);
 }
 
 .orbit-text {
@@ -930,8 +932,10 @@ img {
 }
 
 .roadmap-image img {
-    aspect-ratio: .8;
-    object-fit: cover;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 550px;
 }
 
 .image-label {
@@ -1039,11 +1043,16 @@ img {
 
 .gallery-grid figure {
     position: relative;
-    min-height: 300px;
+    min-height: auto;
+    height: auto;
     margin: 0;
     overflow: hidden;
     border: var(--border);
-    background: var(--forest);
+    background: var(--forest-2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .gallery-grid figure.wide {
@@ -1057,8 +1066,9 @@ img {
 
 .gallery-grid img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    max-height: 550px;
+    object-fit: contain;
     transition: transform .6s ease, filter .6s ease;
 }
 
@@ -1450,12 +1460,23 @@ footer small {
 
     .hero {
         min-height: auto;
-        grid-template-rows: auto 320px;
+        display: flex;
+        flex-direction: column;
     }
 
     .hero-media {
-        min-height: 320px;
-        grid-row: 2;
+        position: relative;
+        width: 100%;
+        min-height: auto;
+        height: auto;
+        padding: 0 16px 20px;
+    }
+
+    .hero-media img {
+        width: 100%;
+        height: auto;
+        max-height: 480px;
+        object-fit: contain;
     }
 
     .hero-copy {
@@ -1570,12 +1591,18 @@ footer small {
         grid-row: auto;
     }
 
-    .gallery-grid figure {
-        min-height: 380px;
+    .gallery-grid figure,
+    .gallery-grid figure.wide,
+    .gallery-grid figure.castle {
+        min-height: auto;
+        height: auto;
     }
 
-    .gallery-grid figure.wide {
-        min-height: 270px;
+    .gallery-grid img {
+        width: 100%;
+        height: auto;
+        max-height: 480px;
+        object-fit: contain;
     }
 
     .community {
