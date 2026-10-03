@@ -47,7 +47,7 @@ wireLinks(".js-tiktok-link", PROJECT.tiktokUrl);
 wireLinks(".js-youtube-link", PROJECT.youtubeUrl);
 
 // Dynamic Chart Initialization
-let chartLoadedPair = "";
+let chartLoadedPair = (PROJECT.pairAddress || "HEs7k4Q6pFKWx5ExpFvxfowoe4YaAfg7ZApeJdbGtPKD").toLowerCase();
 function initChart(pairAddress) {
   const chartContainer = document.getElementById("chart-container");
   if (chartContainer) {
@@ -61,10 +61,10 @@ function initChart(pairAddress) {
         </div>
       `;
     } else {
-      const targetPair = pairAddress || PROJECT.pairAddress || PROJECT.contract;
-      if (chartLoadedPair !== targetPair) {
+      const targetPair = (pairAddress || PROJECT.pairAddress || PROJECT.contract).toLowerCase();
+      if (chartLoadedPair.toLowerCase() !== targetPair) {
         chartLoadedPair = targetPair;
-        chartContainer.innerHTML = `<iframe src="https://dexscreener.com/solana/${targetPair}?embed=1&theme=dark&trades=0&info=0"></iframe>`;
+        chartContainer.innerHTML = `<iframe src="https://dexscreener.com/solana/${targetPair}?embed=1&theme=dark&trades=0&info=0" loading="eager" title="Dexscreener Live Chart"></iframe>`;
       }
     }
   }
