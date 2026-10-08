@@ -1,13 +1,13 @@
 const PROJECT = {
   contract: "3sL58KKh2QdNSfN9VRz8bHGGU5zStdfManVHCTkhpump",
-  pairAddress: "HEs7k4Q6pFKWx5ExpFvxfowoe4YaAfg7ZApeJdbGtPKD",
-  buyUrl: "https://dexscreener.com/solana/HEs7k4Q6pFKWx5ExpFvxfowoe4YaAfg7ZApeJdbGtPKD",
-  xUrl: "https://x.com/Pump_Inu",
-  telegramUrl: "https://t.me/PumpInu_Official",
-  dexUrl: "https://dexscreener.com/solana/HEs7k4Q6pFKWx5ExpFvxfowoe4YaAfg7ZApeJdbGtPKD",
-  founderXUrl: "https://x.com/Pump_Inu",
-  tiktokUrl: "https://t.me/PumpInu_Official",
-  youtubeUrl: "https://t.me/PumpInu_Official",
+  pairAddress: "3sL58KKh2QdNSfN9VRz8bHGGU5zStdfManVHCTkhpump",
+  buyUrl: "https://dexscreener.com/solana/3sL58KKh2QdNSfN9VRz8bHGGU5zStdfManVHCTkhpump",
+  xUrl: "https://x.com/Pump_lnuu",
+  telegramUrl: "https://t.me/httpssPumpInu_Offical_tgg",
+  dexUrl: "https://dexscreener.com/solana/3sL58KKh2QdNSfN9VRz8bHGGU5zStdfManVHCTkhpump",
+  founderXUrl: "https://x.com/Pump_lnuu",
+  tiktokUrl: "https://t.me/httpssPumpInu_Offical_tgg",
+  youtubeUrl: "https://t.me/httpssPumpInu_Offical_tgg",
 };
 
 const menuButton = document.querySelector(".menu-toggle");
@@ -47,7 +47,7 @@ wireLinks(".js-tiktok-link", PROJECT.tiktokUrl);
 wireLinks(".js-youtube-link", PROJECT.youtubeUrl);
 
 // Dynamic Chart Initialization
-let chartLoadedPair = (PROJECT.pairAddress || "HEs7k4Q6pFKWx5ExpFvxfowoe4YaAfg7ZApeJdbGtPKD").toLowerCase();
+let chartLoadedPair = (PROJECT.pairAddress || "3sL58KKh2QdNSfN9VRz8bHGGU5zStdfManVHCTkhpump").toLowerCase();
 function initChart(pairAddress) {
   const chartContainer = document.getElementById("chart-container");
   if (chartContainer) {
@@ -141,7 +141,7 @@ async function fetchDexData() {
     const response = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${PROJECT.contract}`);
     if (!response.ok) throw new Error("Failed to fetch data");
     const data = await response.json();
-    
+
     const pair = data.pairs && data.pairs[0];
     if (pair) {
       if (pair.pairAddress) {
@@ -174,7 +174,7 @@ async function fetchDexData() {
       document.getElementById("stat-mcap").textContent = formatUsd(mcap);
       document.getElementById("stat-price").textContent = formatPrice(price);
       document.getElementById("stat-volume").textContent = formatUsd(volume);
-      
+
       const changeEl = document.getElementById("stat-change");
       changeEl.textContent = formatChange(change);
       if (change < 0) {
@@ -239,7 +239,7 @@ const memeState = {
 function initMemeGenerator() {
   const canvas = document.getElementById('meme-canvas');
   if (!canvas) return;
-  
+
   const ctx = canvas.getContext('2d');
   const topTextInput = document.getElementById('top-text-input');
   const bottomTextInput = document.getElementById('bottom-text-input');
@@ -250,33 +250,33 @@ function initMemeGenerator() {
   const resetBtn = document.getElementById('reset-meme-btn');
   const fileUpload = document.getElementById('custom-image-upload');
   const thumbButtons = document.querySelectorAll('.thumb-card[data-src]');
-  
+
   function drawMeme() {
     if (!memeState.image) return;
-    
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     const cw = canvas.width;
     const ch = canvas.height;
     const imgWidth = memeState.image.width;
     const imgHeight = memeState.image.height;
-    
+
     // Cover scale drawing
     const ratio = Math.max(cw / imgWidth, ch / imgHeight);
     const x = (cw - imgWidth * ratio) / 2;
     const y = (ch - imgHeight * ratio) / 2;
-    
+
     ctx.drawImage(memeState.image, x, y, imgWidth * ratio, imgHeight * ratio);
-    
+
     // Setup stroke and fill for classic impact meme styling
     ctx.fillStyle = '#ffffff';
     ctx.strokeStyle = '#000000';
     ctx.lineWidth = Math.max(4, memeState.fontSize / 6);
     ctx.textAlign = 'center';
     ctx.lineJoin = 'round';
-    
+
     ctx.font = `900 ${memeState.fontSize}px ${memeState.fontFamily}`;
-    
+
     // Draw top text (wrapped to fit)
     if (memeState.topText) {
       ctx.textBaseline = 'top';
@@ -288,7 +288,7 @@ function initMemeGenerator() {
         yOffset += memeState.fontSize * 1.15;
       });
     }
-    
+
     // Draw bottom text (wrapped to fit)
     if (memeState.bottomText) {
       ctx.textBaseline = 'bottom';
@@ -306,7 +306,7 @@ function initMemeGenerator() {
     const words = text.split(' ');
     const lines = [];
     let currentLine = '';
-    
+
     for (let n = 0; n < words.length; n++) {
       const testLine = currentLine + words[n] + ' ';
       const metrics = context.measureText(testLine);
@@ -324,35 +324,35 @@ function initMemeGenerator() {
 
   function loadMemeTemplate(src) {
     const img = new Image();
-    img.onload = function() {
+    img.onload = function () {
       memeState.image = img;
       drawMeme();
     };
     img.src = src;
   }
-  
+
   // Event listeners
   topTextInput.addEventListener('input', (e) => {
     memeState.topText = e.target.value;
     drawMeme();
   });
-  
+
   bottomTextInput.addEventListener('input', (e) => {
     memeState.bottomText = e.target.value;
     drawMeme();
   });
-  
+
   fontSizeSlider.addEventListener('input', (e) => {
     memeState.fontSize = parseInt(e.target.value, 10);
     fontSizeVal.textContent = `${memeState.fontSize}px`;
     drawMeme();
   });
-  
+
   fontFamilySelect.addEventListener('change', (e) => {
     memeState.fontFamily = e.target.value;
     drawMeme();
   });
-  
+
   thumbButtons.forEach(button => {
     button.addEventListener('click', () => {
       document.querySelectorAll('.template-thumbnails .thumb-card').forEach(el => el.classList.remove('active'));
@@ -361,12 +361,12 @@ function initMemeGenerator() {
       loadMemeTemplate(src);
     });
   });
-  
+
   fileUpload.addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = function(event) {
+      reader.onload = function (event) {
         document.querySelectorAll('.template-thumbnails .thumb-card').forEach(el => el.classList.remove('active'));
         document.querySelector('.upload-thumb').classList.add('active');
         loadMemeTemplate(event.target.result);
@@ -374,19 +374,19 @@ function initMemeGenerator() {
       reader.readAsDataURL(file);
     }
   });
-  
+
   resetBtn.addEventListener('click', () => {
     topTextInput.value = '';
     bottomTextInput.value = '';
     fontSizeSlider.value = 40;
     fontSizeVal.textContent = '40px';
     fontFamilySelect.value = 'Impact';
-    
+
     memeState.topText = '';
     memeState.bottomText = '';
     memeState.fontSize = 40;
     memeState.fontFamily = 'Impact';
-    
+
     document.querySelectorAll('.template-thumbnails .thumb-card').forEach(el => el.classList.remove('active'));
     const defaultCard = document.querySelector('.thumb-card[data-src="images/rave.jpg"]');
     if (defaultCard) {
@@ -394,7 +394,7 @@ function initMemeGenerator() {
     }
     loadMemeTemplate('images/rave.jpg');
   });
-  
+
   downloadBtn.addEventListener('click', () => {
     try {
       const dataUrl = canvas.toDataURL('image/png');
@@ -409,7 +409,7 @@ function initMemeGenerator() {
       alert('Could not download image directly. Try right-clicking the canvas to save it.');
     }
   });
-  
+
   // Initial load
   loadMemeTemplate(memeState.imageSrc);
 }
